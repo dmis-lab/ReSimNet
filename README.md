@@ -15,6 +15,7 @@ We implemented Siamese neural networks called ReSimNet that take as input two ch
 - Install [cuda-8.0](https://developer.nvidia.com/cuda-downlaods)
 - Install [cudnn-v5.1](https://developer.nvidia.com/cudnn)
 - Install [Pytorch 0.3.0](https://pytorch.org/)
+- Install [Numpy 1.61.1](https://pypi.org/project/numpy/)
 - Python version >= 3.4.3 is required
 
 ## Download Files You Need to Run ReSimNet
