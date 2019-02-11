@@ -1,0 +1,7 @@
+tasks/data/
+results/
+__pycache__/
+
+*.pyc
+*.swp
+tags
