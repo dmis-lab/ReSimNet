@@ -37,8 +37,7 @@ $ mkdir -p results
 ```
 
 Download the files you need from
-
-http://dmis.korea.ac.kr/downloads?id=ReSimNet
+#### *Dataset is being trasferred to new repository now. Sorry for your inconvenience.
 
 ### 1. Dataset
 
