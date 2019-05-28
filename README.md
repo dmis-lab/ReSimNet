@@ -18,9 +18,8 @@ We implemented Siamese neural networks called ReSimNet that take as input two ch
 - Install [Numpy 1.61.1](https://pypi.org/project/numpy/)
 - Python version >= 3.4.3 is required
 
-## Download Files You Need to Run ReSimNet
-
-Clone our source codes
+## Git Clone & Initial Setting
+Clone our source codes and make folders to save data you need.
 
 ```bash
 # clone the source code on your directory
@@ -36,33 +35,27 @@ cd ../../..
 $ mkdir -p results
 ```
 
-Download the files you need from
-#### *Dataset is being trasferred to new repository now. Sorry for your inconvenience.
+## Download Files You Need to Run ReSimNet
 
-### 1. Dataset
+### Dataset for Training
+- **[ReSimNet-Dataset.pkl](https://drive.google.com/file/d/1Q-vsozn1mL2b4QnhzC5izxuLoidkxAZ6/view?usp=sharing) (43MB)** <br>
+*Save this file to ./ReSimNet/tasks/data/**ReSimNet-Dataset.pkl***
 
-#### Click the link "Download the Dataset".
-Save this file to ./ReSimNet/tasks/data/ReSimNet-Dataset.pkl 
+### Pre-Trained Models
+- **[ReSimNet-model-best.zip](https://drive.google.com/file/d/1QAD_ftYu7eu-2ZeSGiVuu0P6tQ8sE8Vb/view?usp=sharing) (12MB)** <br>
+*Save this file to ./ReSimNet/results/**ReSimNet-models-best.zip** and Unzip.*
 
-### 2. Pre-Trained Models
-
-#### 2-1) Click the link "Download the Best Model".
-
-Save this file to ./ReSimNet/results/ReSimNet-models-best.zip and Unzip. 
-
-#### 2-2) Click the link "All 10 Models for Ensemble".
-
-Save this file to ./ReSimNet/results/ReSimNet-model-ensemble.zip and Unzip. 
+#### All 10 Models for Ensemble
+- **[ReSimNet-models-ensenble.zip](https://drive.google.com/file/d/1SDgSaCiVOEXHHm-8ulJB18Ru6ETj8upf/view?usp=sharing) (117MB)** <br>
+*Save this file to ./ReSimNet/results/**ReSimNet-model-ensemble.zip** and Unzip.*
 
 ### 3. Example Input Pairs
-
-#### Click the link "Download the Example Drugs".
-
-Save this file to ./ReSimNet/tasks/data/pairs/examples.csv 
+- **[examples.csv](https://drive.google.com/file/d/1Vd7tikk8cZ5B_cDFqWX5Ou5yyYZ2r_CN/view?usp=sharing) (244byte)** <br>
+*Save this file to ./ReSimNet/tasks/data/pairs/**examples.csv***
 
 #### Click the link ""Download the FingerPrint Respresentation"".
-
-Save this file to ./ReSimNet/tasks/data/pertid2fingerprint.pkl 
+- **[pertid2fingerprint.pkl](https://drive.google.com/file/d/1r7kwmnRluaUDws1mOvvITn3EFfpyjnDX/view?usp=sharing) (10MB)** <br>
+*Save this file to ./ReSimNet/tasks/data/**pertid2fingerprint.pkl***
 
 
 ## Training the ReSimNet
