@@ -455,7 +455,6 @@ def save_embed(model, dictionary, dataset, args, drug_file):
 
 # Outputs pred vs label scores given a dataloader
 def save_prediction(model, loader, dataset, args):
-
     model.eval()
     csv_writer = csv.writer(open(args.checkpoint_dir + 'pred_' +
                                  args.model_name + '.csv', 'w'))
@@ -539,11 +538,11 @@ def perform_ensemble(model, loader, dataset, args):
 # Outputs pred scores for new pair dataset
 def save_pair_score(model, pair_dir, fp_dir, dataset, args):
     model.eval()
-    csv_writer = csv.writer(open(args.checkpoint_dir + 'prediction_' +
-                                 args.model_name + '.csv', 'w'))
-    csv_writer.writerow(['drug1', 'drug2', 'prediction', 'jaccard'])
-
     drug2rep = pickle.load(open(fp_dir, 'rb'))
+
+    folder_name = args.checkpoint_dir + 'save_pair_score/'
+    if not os.path.exists(folder_name):
+        os.makedirs(folder_name)
 
     for subdir, _, files in os.walk(pair_dir):
         for file_ in sorted(files):
@@ -551,6 +550,10 @@ def save_pair_score(model, pair_dir, fp_dir, dataset, args):
             df = pd.read_csv(os.path.join(subdir, file_), sep=",")
             #print(df)
             LOGGER.info('save_pair_score processing {}...'.format(file_))
+
+            csv_writer = csv.writer(open(folder_name + file_ + '_' +
+                                         args.model_name + '.csv', 'w'))
+            csv_writer.writerow(['drug1', 'drug2', 'prediction', 'jaccard'])
 
             batch = []
             for row_idx, row in df.iterrows():
@@ -601,38 +604,38 @@ def save_pair_score(model, pair_dir, fp_dir, dataset, args):
                     csv_writer.writerow([example[0], example[3], pred, jac])
 
 
-def save_pair_score_for_zinc(model, pair_dir, fp_dir, dataset, args):
+def save_pair_score_for_zinc(model, pair_dir, example_dir, dataset, args):
     print("\n=============================================================")
     print("SAVE PAIR SCORE FOR ZINC")
     print("=============================================================")
 
-
     model.eval()
-    path_targets = "./tasks/data/post-analysis/MTD_post_analysis_id_to_fp.pkl"
+    df_example = pd.read_csv(example_dir, sep=",")
+    print(df_example)
 
-
-    with open(path_targets, "rb") as pickle_file:
-        targets = pickle.load(pickle_file, encoding = "bytes")
+    folder_name = args.checkpoint_dir + 'save_pair_score_for_zinc/'
+    if not os.path.exists(folder_name):
+        os.makedirs(folder_name)
 
     for subdir, _, files in os.walk(pair_dir):
         for file_ in sorted(files):
 
-            df = pd.read_csv(os.path.join(subdir, file_), sep=",")
+            df_zinc = pd.read_csv(os.path.join(subdir, file_), sep=",")
             LOGGER.info('save_pair_score processing {}...'.format(file_))
-            csv_writer = csv.writer(open(args.checkpoint_dir + 'prediction_zinc/' + file_ + '_' +
+            csv_writer = csv.writer(open(folder_name + file_ + '_' +
                                          args.model_name + '.csv', 'w'))
             csv_writer.writerow(['pair1', 'pair2', 'prediction'])
 
             batch = []
-            for row_idx, row in df.iterrows():
+            for row_idx, row in df_zinc.iterrows():
                 drug1 = row['zinc_id']
                 drug1_r = row['fingerprint']
                 drug1_r = [float(value) for value in list(drug1_r)]
 
-                for _id in targets:
+                for row_idex, row in df_example.iterrows():
                     try:
-                        drug2 = _id
-                        drug2_r = targets[_id][0]
+                        drug2 = row['pair']
+                        drug2_r =row['fp']
                         drug2_r = [float(value) for value in list(drug2_r)]
                         #print(drug1, drug1_r, len(drug1_r), drug2, drug2_r, len(drug2_r))
 
@@ -654,9 +657,9 @@ def save_pair_score_for_zinc(model, pair_dir, fp_dir, dataset, args):
                         batch = []
 
                 # Print progress
-                if row_idx % 1000 == 0 or row_idx == len(df) - 1:
+                if row_idx % 1000 == 0 or row_idx == len(df_zinc) - 1:
                     _progress = '{}/{} saving zinc predictions..'.format(
-                        row_idx + 1, len(df))
+                        row_idx + 1, len(df_zinc))
                     LOGGER.info(_progress)
 
             if len(batch) > 0:

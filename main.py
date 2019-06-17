@@ -34,6 +34,7 @@ DRUG_DIR = './tasks/data/drug/validation/'      # For validation (ex: tox21)
 DRUG_FILES = ['drug(v0.5).pkl']
 PAIR_DIR = './tasks/data/pairs/zinc/KKEB.csv'  # New pair data for scoring
 FP_DIR = './tasks/data/fingerprint_v0.6_py2.pkl'
+EXAMPLE_DIR = "./tasks/data/pairs_zinc/example_drugs.csv"
 CKPT_DIR = './results/'
 MODEL_NAME = 'model.mdl'
 
@@ -56,6 +57,8 @@ argparser.add_argument('--drug-files', type=str, default=DRUG_FILES,
 argparser.add_argument('--pair-dir', type=str, default=PAIR_DIR,
                        help='Input new pairs')
 argparser.add_argument('--fp-dir', type=str, default=FP_DIR,
+                       help='Input new pairs')
+argparser.add_argument('--example-dir', type=str, default=EXAMPLE_DIR,
                        help='Input new pairs')
 argparser.add_argument('--checkpoint-dir', type=str, default=CKPT_DIR,
                        help='Directory for model checkpoint')
@@ -86,6 +89,8 @@ argparser.add_argument('--save-prediction', type='bool', default=False,
 argparser.add_argument('--perform-ensemble', type='bool', default=False,
                        help='perform-ensemble and save predictions with loaded model')
 argparser.add_argument('--save-pair-score', type='bool', default=False,
+                       help='Save predictions with loaded model')
+argparser.add_argument('--save-pair-score-zinc', type='bool', default=False,
                        help='Save predictions with loaded model')
 argparser.add_argument('--save-pair-score-ensemble', type='bool', default=False,
                       help='Save predictions with loaded model')
@@ -177,7 +182,7 @@ def run_experiment(model, dataset, run_fn, args, cell_line):
     # Save pair predictions on pretrained model
     if args.save_pair_score:
         if args.save_pair_score_ensemble:
-            models = [8,9]
+            models = [0,1,2,3,4,5,6,7,8,9]
             model_name = args.model_name.split(".")[0]
             for _model in models:
                 print(model_name, _model)
@@ -185,16 +190,22 @@ def run_experiment(model, dataset, run_fn, args, cell_line):
                 print(args.model_name)
                 model.load_checkpoint(args.checkpoint_dir, args.model_name)
                 # run_fn(model, test_loader, dataset, args, metric, train=False)
-                #save_pair_score(model, args.pair_dir, args.fp_dir, dataset, args)
-                save_pair_score_for_zinc(model, args.pair_dir, args.fp_dir, dataset, args)
+                if args.save_pair_score_zinc:
+                    save_pair_score_for_zinc(model, args.pair_dir, args.example_dir, dataset, args)
+                else:
+                    save_pair_score(model, args.pair_dir, args.fp_dir, dataset, args)
             sys.exit()
 
         else:
             model.load_checkpoint(args.checkpoint_dir, args.model_name)
             # run_fn(model, test_loader, dataset, args, metric, train=False)
-            # save_pair_score(model, args.pair_dir, args.fp_dir, dataset, args)
-            save_pair_score_for_zinc(model, args.pair_dir, args.fp_dir, dataset, args)
+            if args.save_pair_score_zinc:
+                save_pair_score_for_zinc(model, args.pair_dir, args.example_dir, dataset, args)
+            else:
+                save_pair_score(model, args.pair_dir, args.fp_dir, dataset, args)
             sys.exit()
+
+
 
     # Save and load model during experiments
     if args.train:

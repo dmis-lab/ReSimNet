@@ -1,12 +1,12 @@
 # ReSimNet
 A Pytorch Implementation of paper
-> ReSimNet: Drug Response Similarity Prediction using Siamese Neural Networks <br>
+> ReSimNet: Drug Response Similarity Prediction based on Siamese Neural Network <br>
 > Jeon and Park et al., 2018
 
 ## Abstract
-Traditional drug discovery approaches identify a target for a disease and find a compound that binds to the target. In this approach, structures of compounds are considered as the most important features because it is assumed that similar structures will bind to the same target. Therefore, structural analogs of the drugs that bind to the target are selected as drug candidates. However, even though compounds are not structural analogs, they may achieve the desired response. A new drug discovery method based on drug response, which can complement the structure-based methods, is needed.
+Two important things in the new drug discovery pipeline are identifying a suitable target for a disease and finding a molecule that binds to the target. Once a target for the disease is identified, chemical compounds that can bind to the target are found through high throughput screening. Structural analogs of the drugs that bind to the target have also been selected as drug candidates. However, even though compounds are not structural analogs, they may achieve the desired response and these candidate compounds may be used for the disease. A new drug discovery method based on drug response, and not on drug structure, is necessary; therefore, we propose a drug response-based drug discovery model called ReSimNet.
 
-We implemented Siamese neural networks called ReSimNet that take as input two chemical compounds and predicts the CMap score of the two compounds, which we use to measure the transcriptional response similarity of the two counpounds. ReSimNet learns the embedding vector of a chemical compound in a transcriptional response space. ReSimNet is trained to minimize the difference between the cosine similarity of the embedding vectors of the two compounds and the CMap score of the two compounds. ReSimNet can find pairs of compounds that are similar in response even though they may have dissimilar structures. In our quantitative evaluation, ReSimNet outperformed the baseline machine learning models. The ReSimNet ensemble model achieves a Pearson correlation of 0.518 (p value of <10^-6) and a precision@1% of 0.989. In addition, in the qualitative analysis, we tested ReSimNet on the ZINC15 database and showed that ReSimNet successfully identifies chemical compounds that are relevant to a prototype drug whose mechanism of action is known.
+We implemented a Siamese neural network that receives the structures of two chemical compounds as an input and trains the similarity of the differential gene expression patterns of the two chemical compounds. ReSimNet can predict the transcriptional response similarity between a pair of chemical compounds and find compound pairs that are similar in response even though they may have dissimilar structures. ReSimNet outperforms structure-based representations in predicting the drug response similarity of compound pairs. Precisely, ReSimNet obtains 0.447 of Pearson correlation (p-value < 10^-6) and 0.967 of Precision@1% when we compare predicted similarity scores and actual transcriptional response-based similarity scores obtained from Connectivity Map. In addition, for the qualitative analysis, we test ReSimNet on the ZINC15 dataset and show that ReSimNet successfully identifies chemical compounds that are relevant to the well-known drugs.
 
 ## Pipeline
 ![Full Pipeline](/images/pipeline_updated_kang2.png)
@@ -15,11 +15,11 @@ We implemented Siamese neural networks called ReSimNet that take as input two ch
 - Install [cuda-8.0](https://developer.nvidia.com/cuda-downlaods)
 - Install [cudnn-v5.1](https://developer.nvidia.com/cudnn)
 - Install [Pytorch 0.3.0](https://pytorch.org/)
-- Install [Numpy 1.61.1](https://pypi.org/project/numpy/)
 - Python version >= 3.4.3 is required
 
-## Git Clone & Initial Setting
-Clone our source codes and make folders to save data you need.
+## Download Files You Need to Run ReSimNet
+
+Clone our source codes
 
 ```bash
 # clone the source code on your directory
@@ -35,27 +35,34 @@ cd ../../..
 $ mkdir -p results
 ```
 
-## Download Files You Need to Run ReSimNet
+Download the files you need from
 
-### Dataset for Training
-- **[ReSimNet-Dataset.pkl](https://drive.google.com/file/d/1Q-vsozn1mL2b4QnhzC5izxuLoidkxAZ6/view?usp=sharing) (43MB)** <br>
-*Save this file to ./ReSimNet/tasks/data/**ReSimNet-Dataset.pkl***
+http://dmis.korea.ac.kr/downloads?id=ReSimNet
 
-### Pre-Trained Models
-- **[ReSimNet-model-best.zip](https://drive.google.com/file/d/1QAD_ftYu7eu-2ZeSGiVuu0P6tQ8sE8Vb/view?usp=sharing) (12MB)** <br>
-*Save this file to ./ReSimNet/results/**ReSimNet-models-best.zip** and Unzip.*
+### 1. Dataset
 
-### All 10 Models for Ensemble
-- **[ReSimNet-models-ensenble.zip](https://drive.google.com/file/d/1SDgSaCiVOEXHHm-8ulJB18Ru6ETj8upf/view?usp=sharing) (117MB)** <br>
-*Save this file to ./ReSimNet/results/**ReSimNet-model-ensemble.zip** and Unzip.*
+#### Click the link "Download the Dataset".
+Save this file to ./ReSimNet/tasks/data/ReSimNet-Dataset.pkl 
 
-### Example Input Pairs
-- **[examples.csv](https://drive.google.com/file/d/1Vd7tikk8cZ5B_cDFqWX5Ou5yyYZ2r_CN/view?usp=sharing) (244byte)** <br>
-*Save this file to ./ReSimNet/tasks/data/pairs/**examples.csv***
+### 2. Pre-Trained Models
 
-### Click the link ""Download the FingerPrint Respresentation"".
-- **[pertid2fingerprint.pkl](https://drive.google.com/file/d/1r7kwmnRluaUDws1mOvvITn3EFfpyjnDX/view?usp=sharing) (10MB)** <br>
-*Save this file to ./ReSimNet/tasks/data/**pertid2fingerprint.pkl***
+#### 2-1) Click the link "Download the Best Model".
+
+Save this file to ./ReSimNet/results/ReSimNet-models-best.zip and Unzip. 
+
+#### 2-2) Click the link "All 10 Models for Ensemble".
+
+Save this file to ./ReSimNet/results/ReSimNet-model-ensemble.zip and Unzip. 
+
+### 3. Example Input Pairs
+
+#### Click the link "Download the Example Drugs".
+
+Save this file to ./ReSimNet/tasks/data/pairs/examples.csv 
+
+#### Click the link ""Download the FingerPrint Respresentation"".
+
+Save this file to ./ReSimNet/tasks/data/pertid2fingerprint.pkl 
 
 
 ## Training the ReSimNet
