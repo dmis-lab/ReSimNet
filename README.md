@@ -23,7 +23,7 @@ Clone our source codes and make folders to save data you need.
 
 ```bash
 # clone the source code on your directory
-$ git clone https://github.com/jhyuklee/ReSimNet.git
+$ git clone https://github.com/dmis-lab/ReSimNet
 $ cd ReSimNet
 
 # make folder to save and load your data
