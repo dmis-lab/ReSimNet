@@ -38,23 +38,23 @@ $ mkdir -p results
 ## Download Files You Need to Run ReSimNet
 
 ### Dataset for Training
-- **[ReSimNet-Dataset.pkl](https://drive.google.com/file/d/1Q-vsozn1mL2b4QnhzC5izxuLoidkxAZ6/view?usp=sharing) (43MB)** <br>
+- **[ReSimNet-Dataset.pkl](https://drive.google.com/file/d/1iju2oBxnRW9jAnoeyOGDe9_hTBwh-vlT/view?usp=drive_link) (43MB)** <br>
 *Save this file to ./ReSimNet/tasks/data/**ReSimNet-Dataset.pkl***
 
 ### Pre-Trained Models
-- **[ReSimNet-model-best.zip](https://drive.google.com/file/d/1QAD_ftYu7eu-2ZeSGiVuu0P6tQ8sE8Vb/view?usp=sharing) (12MB)** <br>
+- **[ReSimNet-model-best.zip](https://drive.google.com/file/d/1hgEFKgrB1BeKRMxFYXmy9mlmYDpwAX7r/view?usp=drive_link) (12MB)** <br>
 *Save this file to ./ReSimNet/results/**ReSimNet-models-best.zip** and Unzip.*
 
 ### All 10 Models for Ensemble
-- **[ReSimNet-models-ensenble.zip](https://drive.google.com/file/d/1SDgSaCiVOEXHHm-8ulJB18Ru6ETj8upf/view?usp=sharing) (117MB)** <br>
+- **[ReSimNet-models-ensenble.zip](https://drive.google.com/file/d/1CapiepxBByB8koXWXqtL7e2_c-IHC4ya/view?usp=drive_link) (117MB)** <br>
 *Save this file to ./ReSimNet/results/**ReSimNet-model-ensemble.zip** and Unzip.*
 
 ### Example Input Pairs
-- **[examples.csv](https://drive.google.com/file/d/1Vd7tikk8cZ5B_cDFqWX5Ou5yyYZ2r_CN/view?usp=sharing) (244byte)** <br>
+- **[examples.csv](https://drive.google.com/file/d/16Vdvt8LrGfuo7RJhaEJVzKo-PcnB5SNt/view?usp=drive_link) (244byte)** <br>
 *Save this file to ./ReSimNet/tasks/data/pairs/**examples.csv***
 
 ### Click the link ""Download the FingerPrint Respresentation"".
-- **[pertid2fingerprint.pkl](https://drive.google.com/file/d/1r7kwmnRluaUDws1mOvvITn3EFfpyjnDX/view?usp=sharing) (10MB)** <br>
+- **[pertid2fingerprint.pkl](https://drive.google.com/file/d/1zK3693qPDxUZL7uRIutbA7KdmfkJtn29/view?usp=drive_link) (10MB)** <br>
 *Save this file to ./ReSimNet/tasks/data/**pertid2fingerprint.pkl***
 
 
@@ -103,7 +103,7 @@ prediction
 $ bash predict_zinc.sh
 ```
 ### Click the link ""Download the ZINC files"".
-- **[zinc-test.zip](https://drive.google.com/file/d/1YI2J81rahVWst3yU7741CVr8L-0Jc_NK/view?usp=sharing) (8KB)** <br>
+- **[zinc-test.zip](https://drive.google.com/file/d/1RT7oSvJtjlOsoFaA_ZpFuQHoPSA26CrL/view?usp=drive_link) (8KB)** <br>
 *Save this file to ./ReSimNet/tasks/data/pairs_zinc/**zinc-test.zip** and unzip.*
 
 ```bash
